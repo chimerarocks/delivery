@@ -2,10 +2,10 @@
 
 namespace Delivery\Http\Controllers\Auth;
 
-use Delivery\User;
-use Validator;
 use Delivery\Http\Controllers\Controller;
+use Delivery\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Validator;
 
 class RegisterController extends Controller
 {
