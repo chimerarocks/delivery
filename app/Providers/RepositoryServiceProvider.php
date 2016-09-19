@@ -24,33 +24,33 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(
-            Delivery\Repositories\CategoryRepository::class,
-            Delivery\Repositories\CategoryRepositoryEloquent::class
+            \Delivery\Repositories\CategoryRepository::class,
+            \Delivery\Repositories\CategoryRepositoryEloquent::class
         );
 
         $this->app->bind(
-            Delivery\Repositories\ClientRepository::class,
-            Delivery\Repositories\ClientRepositoryEloquent::class
+            \Delivery\Repositories\ClientRepository::class,
+            \Delivery\Repositories\ClientRepositoryEloquent::class
         );
 
         $this->app->bind(
-            Delivery\Repositories\OrderRepository::class,
-            Delivery\Repositories\OrderRepositoryEloquent::class
+            \Delivery\Repositories\OrderRepository::class,
+            \Delivery\Repositories\OrderRepositoryEloquent::class
         );
 
         $this->app->bind(
-            Delivery\Repositories\OrderItemRepository::class,
-            Delivery\Repositories\OrderItemRepositoryEloquent::class
+            \Delivery\Repositories\OrderItemRepository::class,
+            \Delivery\Repositories\OrderItemRepositoryEloquent::class
         );
 
         $this->app->bind(
-            Delivery\Repositories\ProductRepository::class,
-            Delivery\Repositories\ProductRepositoryEloquent::class
+            \Delivery\Repositories\ProductRepository::class,
+            \Delivery\Repositories\ProductRepositoryEloquent::class
         );
 
         $this->app->bind(
-            Delivery\Repositories\UserRepository::class,
-            Delivery\Repositories\UserRepositoryEloquent::class
+            \Delivery\Repositories\UserRepository::class,
+            \Delivery\Repositories\UserRepositoryEloquent::class
         );
     }
 }

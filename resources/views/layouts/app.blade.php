@@ -42,7 +42,11 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    @if (Auth::check() && strtolower(Auth::user()->role) == 'admin')
+                    <li><a href="{{ route('admin.categories.index') }}">Categories</a></li>
+                    <li><a href="{{ route('admin.products.index') }}">Produtos</a></li>
+                    <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->

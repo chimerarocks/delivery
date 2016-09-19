@@ -18,3 +18,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group([
+	'prefix' => 'admin', 
+	'as' => 'admin.',
+	'middleware' => ['auth.checkrole']
+	], function() {
+	Route::resource('categories', 'Admin\CategoryController', ['except' => ['destroy']]);
+	Route::resource('products', 'Admin\ProductController');
+	Route::resource('clients', 'Admin\ClientController');
+});

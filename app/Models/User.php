@@ -10,7 +10,7 @@ use Prettus\Repository\Traits\TransformableTrait;
 
 class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait, Notifiable;;
+    use TransformableTrait, Notifiable;
 
     /**
      * The attributes that are mass assignable.
