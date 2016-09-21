@@ -24,13 +24,24 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         return User::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function getDeliveryMen()
+    {
+        $deliveryman = $this->model->where(['role' => 'deliveryman'])->get();
+
+        $deliverymen = [];
+
+        foreach ($deliveryman as $d) {
+            $deliverymen[$d->id] = $d->name;
+        }
+
+        return $deliverymen;
     }
 }

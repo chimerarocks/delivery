@@ -52,5 +52,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \Delivery\Repositories\UserRepository::class,
             \Delivery\Repositories\UserRepositoryEloquent::class
         );
+
+        $this->app->bind(
+            \Delivery\Repositories\CouponRepository::class,
+            \Delivery\Repositories\CouponRepositoryEloquent::class
+        );
     }
 }

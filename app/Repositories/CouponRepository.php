@@ -5,10 +5,10 @@ namespace Delivery\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface ProductRepository
+ * Interface CouponRepository
  * @package namespace Delivery\Repositories;
  */
-interface ProductRepository extends RepositoryInterface
+interface CouponRepository extends RepositoryInterface
 {
-	public function list($column);
+    //
 }

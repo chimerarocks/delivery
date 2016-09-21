@@ -13,11 +13,11 @@
 			]) 
 		}}
 
+		@include('admin.product._form')
+
 		<div class="form-group">
 			{{ Form::submit('Editar Produto', ['class' => 'btn btn-primary']) }}
 		</div>
-
-		@include('admin.product._form')
 
 		{{ Form::close() }}
 
