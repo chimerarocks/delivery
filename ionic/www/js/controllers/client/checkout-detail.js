@@ -1,6 +1,6 @@
 angular.module('starter.controllers')
 	
-	.controller('LoginController', ['$scope', 'OAuth', '$ionicPopup', '$state', function($scope, OAuth, $ionicPopup, $state) {
+	.controller('ClientCheckoutDetailController', ['$scope', 'OAuth', '$ionicPopup', '$state', function($scope, OAuth, $ionicPopup, $state) {
 		
 		$scope.user = {
 			username: '',

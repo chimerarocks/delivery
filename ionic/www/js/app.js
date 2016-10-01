@@ -1,5 +1,7 @@
 // Ionic Starter App
 
+angular.module('starter.controllers', [])
+
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -36,6 +38,26 @@ angular.module('starter', ['ionic', 'starter.controllers','angular-oauth2'])
       controller: function ($scope) {
 
       }
+    })
+    .state('client', {
+      abstract: true,
+      url: '/client',
+      template: '<ui-view/>'
+    })
+    .state('client.checkout', {
+      url: '/checkout',
+      templateUrl: 'templates/client/checkout.html',
+      controller: 'ClientCheckoutController'
+    })
+    .state('client.checkout.detail', {
+      url: '/checkout/detail/:index',
+      templateUrl: 'templates/client/checkout-detail.html',
+      controller: 'ClientCheckoutDetailController'
+    })
+    .state('client.products', {
+      url: '/products',
+      templateUrl: 'templates/client/products.html',
+      controller: 'ClientProductsController'
     })
 
   OAuthProvider.configure({
