@@ -2,9 +2,9 @@
 
 @section('content')
 	<div class="container">
-		<h3>Categorias</h3>
+		<h3>Meus Pedidos</h3>
 
-		<a href="{{ route('admin.categories.create') }}" class="btn btn-default">Nova Categoria</a>
+		<a href="{{ route('customer.orders.create') }}" class="btn btn-default">Novo Pedido</a>
 
 		<br><br>
 
@@ -12,25 +12,20 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Nome</th>
-					<th>Ação</th>
+					<th>Total</th>
+					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
-				@forelse($categories as $category)
+				@forelse($orders as $order)
 				<tr>
-					<td>{{$category->id}}</td>
-					<td>{{$category->name}}</td>
-					<td>
-						<a href="{{ route('admin.categories.edit', ['id' => $category->id]) }}" 
-						class="btn btn-default">
-							Editar
-						</a>
-					</td>
+					<td>{{$order->id}}</td>
+					<td>{{$order->total}}</td>
+					<td>{{$order->status}}</td>
 				</tr>
 				@empty
 				<tr>
-					<td>Nenhuma categoria registrada</td>
+					<td>Nenhum pedido registrado</td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -38,7 +33,7 @@
 			</tbody>
 		</table>
 	
-		{{ $categories->render() }}
+		{{ $orders->render() }}
 
 	</div>
 @endsection

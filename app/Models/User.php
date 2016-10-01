@@ -4,13 +4,14 @@ namespace Delivery\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 
 class User extends Authenticatable implements Transformable
 {
-    use TransformableTrait, Notifiable;
+    use TransformableTrait, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

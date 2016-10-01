@@ -12,7 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    
+    // $query = http_build_query([
+    //  	'client_id' => '3',
+    // 	'redirect_uri' => 'http://localhost:9000/callback',
+    //   	'response_type' => 'code',
+    //   	'scope' => ''
+    // ]);
+    
+    // return redirect('http://localhost:8000/oauth/authorize?' . $query );
 });
 
 Auth::routes();
@@ -35,5 +43,5 @@ Route::group([
 	'prefix' => 'customer', 
 	'as' => 'customer.'
 	], function() {
-	Route::get('orders/create', ['as' => 'order.create', 'uses' => 'CheckoutController@create']);
+	Route::resource('orders', 'CheckoutController', ['except' => ['show']]);
 });

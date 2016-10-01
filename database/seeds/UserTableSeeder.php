@@ -16,8 +16,18 @@ class UserTableSeeder extends Seeder
         	$u->client()->save(factory(\Delivery\Models\Client::class)->make());
         });
 
-        factory(User::class)->create(['email' => 'user@user.com']);
-        factory(User::class)->create(['email' => 'admin@user.com', 'role' => 'admin']);
-        factory(User::class)->create(['email' => 'deliveryman@user.com', 'role' => 'deliveryman']);
+        factory(User::class)->create([
+            'email' => 'user@user.com'
+        ])->client()->save(factory(\Delivery\Models\Client::class)->make());
+        
+        factory(User::class)->create([
+            'email' => 'admin@user.com', 
+            'role' => 'admin'
+        ])->client()->save(factory(\Delivery\Models\Client::class)->make());;
+        
+        factory(User::class)->create([
+            'email' => 'deliveryman@user.com', 
+            'role' => 'deliveryman'
+        ]);
     }
 }
