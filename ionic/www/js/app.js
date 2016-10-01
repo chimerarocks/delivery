@@ -30,9 +30,12 @@ angular.module('starter', ['ionic', 'starter.controllers','angular-oauth2'])
       templateUrl: 'templates/login.html',
       controller: 'LoginController'
     })
-    .state('callback', {
-      url: '/callback',
-      templateUrl: 'index.html'
+    .state('home', {
+      url: '/home',
+      templateUrl: 'templates/home.html',
+      controller: function ($scope) {
+
+      }
     })
 
   OAuthProvider.configure({

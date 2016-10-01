@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 	
-	.controller('LoginController', ['$scope', 'OAuth', '$ionicPopup',function($scope, OAuth, $ionicPopup) {
+	.controller('LoginController', ['$scope', 'OAuth', '$ionicPopup', '$state', function($scope, OAuth, $ionicPopup, $state) {
 		
 		$scope.user = {
 			username: '',
@@ -9,20 +9,15 @@ angular.module('starter.controllers', [])
 		}
 
 		$scope.login = function() {
-			OAuth.getAccessToken($scope.user).then(function(data) {
-
+			OAuth.getAccessToken($scope.user)
+			.then(function(data) {
+				$state.go('home');
 			}, function(responseError) {
-				console.log(responseError);
+				$ionicPopup.alert({
+					title: 'Advertência',
+					template: 'Login e/ou senha inválidos'
+				})
 			})
-			// query = [
-			// 'client_id=3',
-   //          'redirect_uri=http://localhost:8100/#/callback',
-   //    		'response_type=code',
-   //    		'grant_type=password',
-   //    		'scope'
-   //    		];
-   //    		queryString = query.join('&')
-			// window.location = 'http://localhost:8000/oauth/authorize?' + queryString;
 		}
 
 	}])
