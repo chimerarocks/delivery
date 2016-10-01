@@ -11,9 +11,9 @@ class ProductsForEachCategoryTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Delivery\Models\Category::class, 10)->create()->each(function($c) {
+        factory(\Delivery\Models\Category::class, 10)->create()->each(function($c) {
         	foreach (range(1,10) as $i) {
-        		$c->products()->save(factory(Delivery\Models\Product::class)->make());
+        		$c->products()->save(factory(\Delivery\Models\Product::class)->make());
         	}
         });
     }

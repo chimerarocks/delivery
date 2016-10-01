@@ -45,3 +45,23 @@ $factory->define(Delivery\Models\Client::class, function (Faker\Generator $faker
         'zipcode' => $faker->postcode,
     ];
 });
+
+$factory->define(Delivery\Models\Order::class, function (Faker\Generator $faker) {
+    return [
+        'client_id' => rand(1,10),
+        'total' => rand(50,100),
+        'status' => 0,
+    ];
+});
+
+$factory->define(Delivery\Models\OrderItem::class, function (Faker\Generator $faker) {
+    return [
+    ];
+});
+
+$factory->define(Delivery\Models\Coupon::class, function (Faker\Generator $faker) {
+    return [
+        'code' => rand(100,1000),
+        'value' => rand(50,100)
+    ];
+});

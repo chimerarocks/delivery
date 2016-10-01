@@ -14,6 +14,20 @@ use Delivery\Validators\ProductValidator;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+    public function list($column)
+    {
+        $product = $this->model->get($column);
+
+        return $product;
+        $products = [];
+
+        foreach ($product as $c) {
+            $products[$c->id] = $c->name;
+        }
+
+        return $products;
+    }
+
     /**
      * Specify Model class name
      *

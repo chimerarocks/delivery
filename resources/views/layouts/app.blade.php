@@ -42,7 +42,15 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    &nbsp;
+                    @if (Auth::check() && strtolower(Auth::user()->role) == 'admin')
+                    <li><a href="{{ route('admin.categories.index') }}">Categories</a></li>
+                    <li><a href="{{ route('admin.products.index') }}">Produtos</a></li>
+                    <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
+                    <li><a href="{{ route('admin.coupons.index') }}">Cupons</a></li>
+                    <li><a href="{{ route('admin.orders.index') }}">Pedidos</a></li>
+                    @elseif (Auth::check() && strtolower(Auth::user()->role) == 'client')
+                    <li><a href="{{ route('customer.orders.index') }}">Meus Pedidos</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -80,6 +88,10 @@
     @yield('content')
 
     <!-- Scripts -->
+    <script   src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>  
     <script src="/js/app.js"></script>
+    
+    @yield('post-script')
+
 </body>
 </html>

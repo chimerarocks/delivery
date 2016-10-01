@@ -15,6 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Delivery\Http\Middleware\CorsHeadersInsert::class,
     ];
 
     /**
@@ -52,5 +53,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Delivery\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'auth.checkrole' => \Delivery\Http\Middleware\CheckRole::class,
+        'api.checkrole' => \Delivery\Http\Middleware\ApiCheckRole::class,
     ];
 }
