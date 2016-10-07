@@ -1,0 +1,38 @@
+<ion-view>
+	<ion-nav-title> Pedido: #{{order.id}} </ion-nav-title>
+	<div class="bar bar-subheader">
+		<h2 class="title">Total: R$ {{order.total}}</h2>
+	</div>
+	<ion-content class="padding has-subheader">
+		<div class="item item-divider">
+			Data da compra: {{order.created_at.date | limitTo: 10 | date: 'dd/MM/yyyy'}}
+		</div>
+		<ion-list>
+			<ion-item ng-repeat="i in order.items.data" ng-click="openOrderDetail(order)">
+				<h2>{{ i.product.data.name }}</h2>
+				<div class="col">
+					Qtd: {{ i.qtd }} <br/>
+					<i class="icon ion-cash"> {{i.price}}</i>
+				</div>
+				<div class="col text-right">
+					<i class="ion ion-social-usd"> {{i.qtd * i.price}}</i>
+				</div>
+			</ion-item>
+		</ion-list>
+		<ui-gmap-google-map center="map.center"
+							zoom="map.zoom"
+							bounds="map.bounds">
+			<ui-gmap-marker idkey="m.id" 
+							coords="m.coords"
+							options="m.options"
+							ng-repeat="m in markers">
+			</ui-gmap-marker>
+		</ui-gmap-google-map>
+	</ion-content>
+</ion-view>
+
+<style type="text/css">
+	.angular-google-map-container {
+		height: 400px;
+	}
+</style>

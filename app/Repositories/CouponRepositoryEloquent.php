@@ -2,11 +2,12 @@
 
 namespace Delivery\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Delivery\Repositories\CouponRepository;
 use Delivery\Models\Coupon;
+use Delivery\Presenters\CouponPresenter;
+use Delivery\Repositories\CouponRepository;
 use Delivery\Validators\CouponValidator;
+use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class CouponRepositoryEloquent
@@ -14,6 +15,8 @@ use Delivery\Validators\CouponValidator;
  */
 class CouponRepositoryEloquent extends BaseRepository implements CouponRepository
 {
+    protected $skipPresenter = true;
+
     /**
      * Specify Model class name
      *
@@ -24,7 +27,10 @@ class CouponRepositoryEloquent extends BaseRepository implements CouponRepositor
         return Coupon::class;
     }
 
-    
+    public function presenter()
+    {
+        return CouponPresenter::class;
+    }
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +38,17 @@ class CouponRepositoryEloquent extends BaseRepository implements CouponRepositor
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function findByCode($code)
+    {
+        $result = $this->model->where('code', $code)->where('used',0)->first();
+
+        if ($result) {
+            return $this->parserResult($result);
+        }
+
+        throw (new ModelNotFoundException)->setModel(get_class($this->model));
+        ;
     }
 }

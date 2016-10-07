@@ -1,5 +1,37 @@
 <ion-view>
-	<ion-content>
-		Checkout
+	<ion-nav-title> Pedido </ion-nav-title>
+	<div class="bar bar-subheader">
+		<button ng-click="openListProducts()" class="button button-clear button-icon ion-plus"></button>
+		<h2 class="title">Total: R$ {{total}}</h2>
+		<button class="button button-clear button-icon ion-minus-circled" ng-click="showDelete =!showDelete"
+		ng-class="{'button-assertive': showDelete}"></button>
+	</div>
+	<ion-content class="padding has-subheader">
+		<ion-list show-delete="showDelete">
+			<ion-item class="item-balanced item-icon-left" ng-show="coupon.value != null">
+				<span class="icon ion-close" ng-click="removeCoupon()"></span>
+				<strong>Cupom</strong>
+				<span class="badge badge-balanced">- R$ {{coupon.value}}</span>
+			</ion-item>
+			<ion-item ng-repeat="i in items" ng-click="openProductDetail($index)">
+				<h2>{{i.name}}</h2>
+				<div class="row">
+					<div class="col">
+						Qtd: {{i.qtd}} <br/>
+						<i class="ion ion-cash">{{i.price}}</i>
+					</div>
+					<div class="col text-right">
+						<i class="ion ion-social-usd">{{i.qtd * i.price}}</i>
+					</div>
+				</div>
+				<ion-delete-button class="ion ion-minus-circled" ng-click="removeItem($index)"></ion-delete-button>
+			</ion-item>
+		</ion-list>
+		<button type="button" class="button button-balanced button-full" ng-click="readBarCode()" ng-disabled="coupon.value != null">
+			Adicionar cupom
+		</button>
+		<button type="button" class="button button-assertive button-full" ng-click="save()">
+			Finalizar pedido
+		</button>
 	</ion-content>
 </ion-view>

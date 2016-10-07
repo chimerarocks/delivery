@@ -1,23 +1,24 @@
 angular.module('starter.controllers')
 	
-	.controller('ClientProductsController', ['$scope', 'OAuth', '$ionicPopup', '$state', function($scope, OAuth, $ionicPopup, $state) {
-		
-		$scope.user = {
-			username: '',
-			password: '',
-			scope: ''
-		}
+	.controller('ClientProductsController', [
+		'$scope','$state', 'Product', '$ionicLoading', '$cart',
+		function($scope, $state, Product, $ionicLoading, $cart) {
+			$scope.products = [];
+			$ionicLoading.show({
+				template: 'Carregando... '
+			});
+			Product.query({}, 
+				function(data) {
+					$scope.products = data.data;
+					$ionicLoading.hide();
+				}, function (error) {
+					$ionicLoading.hide();
+				}
+			);
 
-		$scope.login = function() {
-			OAuth.getAccessToken($scope.user)
-			.then(function(data) {
-				$state.go('home');
-			}, function(responseError) {
-				$ionicPopup.alert({
-					title: 'Advertência',
-					template: 'Login e/ou senha inválidos'
-				})
-			})
-		}
-
+			$scope.addItem = function(item) {
+				item.qtd = 1;
+				$cart.addItem(item);
+				$state.go('client.checkout');
+			}
 	}])

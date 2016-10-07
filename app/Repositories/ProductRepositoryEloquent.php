@@ -14,6 +14,8 @@ use Delivery\Validators\ProductValidator;
  */
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
+    protected $skipPresenter = true;
+
     public function list($column)
     {
         $product = $this->model->get($column);
@@ -46,5 +48,10 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return \Delivery\Presenters\ProductPresenter::class;
     }
 }

@@ -13,14 +13,6 @@
 
 Route::get('/', function () {
     
-    // $query = http_build_query([
-    //  	'client_id' => '3',
-    // 	'redirect_uri' => 'http://localhost:9000/callback',
-    //   	'response_type' => 'code',
-    //   	'scope' => ''
-    // ]);
-    
-    // return redirect('http://localhost:8000/oauth/authorize?' . $query );
 });
 
 Auth::routes();

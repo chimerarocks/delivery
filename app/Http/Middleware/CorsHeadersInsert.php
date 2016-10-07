@@ -18,7 +18,6 @@ class CorsHeadersInsert
         if ($request->is('oauth/*')) {
             header("Access-Control-Allow-Origin: *");       
         }
-
         return $next($request);
     }
 }

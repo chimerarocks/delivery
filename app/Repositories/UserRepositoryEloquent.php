@@ -14,6 +14,8 @@ use Delivery\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $skipPresenter = true;
+
     /**
      * Specify Model class name
      *
@@ -43,5 +45,10 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         }
 
         return $deliverymen;
+    }
+
+    public function presenter()
+    {
+        return \Delivery\Presenters\UserPresenter::class;
     }
 }

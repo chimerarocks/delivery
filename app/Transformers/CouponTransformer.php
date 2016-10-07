@@ -22,9 +22,8 @@ class CouponTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
-            /* place your other model properties here */
-
+            'code'       => $model->code,
+            'value'      => (float) $model->value,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];

@@ -10,7 +10,8 @@
         "laravelcollective/html": "^5.3",
         "laravel/passport": "^1.0",
         "league/fractal": "^0.14.0",
-        "barryvdh/laravel-cors": "^0.8.2"
+        "barryvdh/laravel-cors": "^0.8.2",
+        "pusher/pusher-php-server": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
