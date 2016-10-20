@@ -1,20 +1,26 @@
 angular.module('starter.controllers')
 	
 	.controller('ClientDeliveryController', [
-		'$scope', '$state', '$stateParams', '$ionicLoading', '$ionicPopup', 'ClientOrder', 'UserData', '$pusher', '$window',
-		function($scope, $state, $stateParams, $ionicLoading, $ionicPopup, ClientOrder, UserData, $pusher, $window) {
+		'$scope', '$state', '$stateParams', '$ionicLoading', '$ionicPopup', 
+		'ClientOrder', 'UserData', '$pusher', '$window', '$map', 'uiGmapGoogleMapApi',
+		function(
+			$scope, 
+			$state, 
+			$stateParams, 
+			$ionicLoading, 
+			$ionicPopup, 
+			ClientOrder, 
+			UserData, 
+			$pusher, 
+			$window,
+			$map,
+			uiGmapGoogleMapApi) {
 		
 		var iconUrl = 'http://maps.google.com/mapfiles/kml/pal2';
 
 		$scope.order = {};
 
-		$scope.map = {
-			center: {
-				latitude: 0,
-				longitude: 0
-			},
-			zoom: 12
-		};
+		$scope.map = $map;
 
 		$scope.markers = [];
 
@@ -22,14 +28,18 @@ angular.module('starter.controllers')
 			template: 'Carregando...'
 		});
 
+		uiGmapGoogleMapApi.then(function(maps) {
+			$ionicLoading.hide();
+		}, function(error) {
+			$ionicLoading.hide();
+		});
+
 		ClientOrder.get({id: $stateParams.id, include: "items, cupom"}, function(data) {
 			$scope.order = data.data;
-			$ionicLoading.hide();
 			if (parseInt($scope.Order.status, 10) == 1) {
 				initMarkers();
 			}
 		}, function(error) {
-			$ionicLoading.hide();
 			$ionicPopup.alert({
 				title: 'Advertência',
 				template: 'Pedido não está em entrega'
@@ -124,13 +134,27 @@ angular.module('starter.controllers')
 
 			$scope.map.bounds = {
 				northeast: {
-					latitude: bounds.getNorthEast().lat();
-					longitude: bounds.getNorthEast().lng();
+					latitude: bounds.getNorthEast().lat(),
+					longitude: bounds.getNorthEast().lng()
 				},
 				southwest: {
-					latitude: bounds.getSouthWest().lat();
-					longitude: bounds.getSouthWest().lng();
+					latitude: bounds.getSouthWest().lat(),
+					longitude: bounds.getSouthWest().lng()
 				}
 			};
+		};
+	}])
+
+	.controller('ClientDeliveryDescentralizeController',['$scope', '$map', function($scope, $map) {
+		$scope.map = $map;
+		$scope.fit = function() {
+			$scope.map.fit = !$scope.map.fit;
+		};
+	}])
+	.controller('ClientDeliveryReloadController', ['$scope', '$window', '$timeout', function($scope, $window, $timeout) {
+		$scope.reload = function() {
+			$timeout(function() {
+				$window.location.reload();
+			},100);
 		};
 	}])

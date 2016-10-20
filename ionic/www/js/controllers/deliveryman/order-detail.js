@@ -36,8 +36,12 @@ angular.module('starter.controllers')
 				watch.then(null, function(error) {
 					//error
 				}, function(position){
-					lat = position.coords.latitude;
-					long = position.coords.longitude;
+					if (!lat) {
+						lat = position.coords.latitude;
+						long = position.coords.longitude;
+					} else {
+						lat = 0;
+					}
 					DeliverymanOrder.geo({id: $stateParams.id}, {
 						lat: lat,
 						long: long

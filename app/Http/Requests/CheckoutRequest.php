@@ -44,6 +44,6 @@ class CheckoutRequest extends FormRequest
     public function buildRulesItems($key, array &$rules)
     {
         $rules["items.$key.product_id"] = 'required';
-        $rules["items.$key.qtd_id"] = 'required';
+        $rules["items.$key.qtd"] = 'required';
     }
 }

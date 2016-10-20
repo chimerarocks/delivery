@@ -8,11 +8,11 @@ angular.module('starter.filters', []);
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', [
-  'ionic', 'starter.controllers', 'starter.services', 'starter.filters',
+  'ionic', 'ionic.service.core', 'starter.controllers', 'starter.services', 'starter.filters',
   'angular-oauth2', 'ngResource', 'ngCordova', 'uiGmapgoogle-maps', 'pusher-angular'
   ])
 
-.run(function($ionicPlatform, $window, appConfig) {
+.run(function($ionicPlatform, $window, appConfig, $localStorage) {
   $window.client = new Pusher(appConfig.pusherKey);
 
   $ionicPlatform.ready(function() {
@@ -25,6 +25,22 @@ angular.module('starter', [
       // from snapping when text inputs are focused. Ionic handles this internally for
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
+      /*Ionic.io();
+      var push = new Ionic.Push({
+        debug:true,
+        onNotification: function(message) {
+          alert(message.text);
+        },
+        pluginConfig: {
+          android: {
+            iconColor: red
+          }
+        }
+      });
+      push.register(function(token) {
+        $localStorage.set('device_token', token.token);
+      });
+      */
     }
     if(window.StatusBar) {
       StatusBar.styleDefault();
@@ -43,7 +59,8 @@ angular.module('starter', [
       orders: '/api/deliveryman/orders'
     },
     coupons: '/api/coupons',
-    users: '/api/authenticated'
+    authenticated: '/api/authenticated',
+    device_token: '/api/device_token'
   },
   pusherKey: 'ccf60973ff2e48a102d0'
 })
@@ -84,13 +101,13 @@ angular.module('starter', [
     .state('client.checkout', {
       url: '/checkout',
       cache: false,
-      templateUrl: 'templates/client/orders.html',
-      controller: 'ClientOrderController'
+      templateUrl: 'templates/client/checkout.html',
+      controller: 'ClientCheckoutController'
     })
     .state('client.order', {
       url: '/order',
-      templateUrl: 'templates/client/checkout.html',
-      controller: 'ClientCheckoutController'
+      templateUrl: 'templates/client/orders.html',
+      controller: 'ClientOrderController'
     })
     .state('client.order_detail', {
       url: '/order_detail/:id',
@@ -98,12 +115,12 @@ angular.module('starter', [
       controller: 'ClientOrderDetailController'
     })
     .state('client.checkout_detail', {
-      url: '/detail/:index',
+      url: '/checkout-detail/:index',
       templateUrl: 'templates/client/checkout_detail.html',
       controller: 'ClientCheckoutDetailController'
     })
-    .state('client.checkout.successful', {
-      url: '/successful',
+    .state('client.checkout_successful', {
+      url: '/checkout_successful',
       templateUrl: 'templates/client/checkout_successful.html',
       controller: 'ClientCheckoutSuccessfulController'
     })
@@ -127,7 +144,7 @@ angular.module('starter', [
     })
     .state('deliveryman.order', {
       url: '/order',
-      templateUrl: 'templates/deliveryman/orders.html',
+      templateUrl: 'templates/deliveryman/order.html',
       controller: 'DeliverymanOrderController'
     })
     .state('deliveryman.order_detail', {
@@ -141,8 +158,8 @@ angular.module('starter', [
 
   OAuthProvider.configure({
     baseUrl: appConfig.baseUrl,
-    clientId: '12',
-    clientSecret: 'YwuWROkYQUJmhATKtii2rTQCYGpFrk7qtjN74gvu',
+    clientId: '2',
+    clientSecret: '3qpQJOwDrXp6OD0OumGrtCNxCPHcobGqr9m2h641',
     grantPath: '/oauth/token',
     revokePath: '/oauth/revoke'
   })

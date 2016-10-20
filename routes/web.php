@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    
+Route::get('/', function() {
+	return redirect('home');
 });
 
 Auth::routes();
@@ -25,7 +25,7 @@ Route::group([
 	'middleware' => ['auth.checkrole']
 	], function() {
 	Route::resource('categories', 'Admin\CategoryController', ['except' => ['destroy']]);
-	Route::resource('products', 'Admin\ProductController', ['except' => ['destroy']]);
+	Route::resource('products', 'Admin\ProductController');
 	Route::resource('orders', 'Admin\OrderController', ['except' => ['destroy, create, store']]);
 	Route::resource('coupons', 'Admin\CouponController');
 	Route::resource('clients', 'Admin\ClientController');

@@ -1,6 +1,6 @@
 <?php
 
-namespace Http\Controllers\Api;
+namespace Delivery\Http\Controllers\Api;
 
 use Delivery\Http\Controllers\Controller;
 use Delivery\Repositories\CouponRepository;

@@ -11,7 +11,9 @@
         "laravel/passport": "^1.0",
         "league/fractal": "^0.14.0",
         "barryvdh/laravel-cors": "^0.8.2",
-        "pusher/pusher-php-server": "^2.6"
+        "pusher/pusher-php-server": "^2.6",
+        "dmitrovskiy/ionic-push-php": "^1.0",
+        "prettus/l5-repository": "^2.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

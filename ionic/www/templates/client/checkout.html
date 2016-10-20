@@ -1,10 +1,10 @@
 <ion-view>
 	<ion-nav-title> Pedido </ion-nav-title>
 	<div class="bar bar-subheader">
-		<button ng-click="openListProducts()" class="button button-clear button-icon ion-plus"></button>
+		<button ng-click="openListProducts()" class="button button-clear button-icon button-stable ion-plus"></button>
 		<h2 class="title">Total: R$ {{total}}</h2>
 		<button class="button button-clear button-icon ion-minus-circled" ng-click="showDelete =!showDelete"
-		ng-class="{'button-assertive': showDelete}"></button>
+		ng-class="{'button-assertive': showDelete, 'button-light': !showDelete}"></button>
 	</div>
 	<ion-content class="padding has-subheader">
 		<ion-list show-delete="showDelete">

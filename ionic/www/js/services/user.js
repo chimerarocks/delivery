@@ -8,7 +8,11 @@ angular.module('starter.services')
 		},
 		authenticated: {
 			method: 'GET',
-			url: appConfig.baseUrl + appConfig.endpoints.users
+			url: appConfig.baseUrl + appConfig.endpoints.authenticated
+		},
+		updateDeviceToken: {
+			method: 'PATCH',
+			url: appConfig.baseUrl + appConfig.endpoints.device_token
 		}
 	});
 

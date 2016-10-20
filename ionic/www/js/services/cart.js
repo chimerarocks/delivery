@@ -48,7 +48,7 @@ angular.module('starter.services')
 		var cart = this.get(),
 			itemAux = cart.items[index];
 		itemAux.qtd = qtd;
-		item.subtotal = calculateSubTotal(itemAux);
+		itemAux.subtotal = calculateSubTotal(itemAux);
 		cart.total = getTotal(cart.items);
 		$localStorage.setObject(key, cart);
 	}

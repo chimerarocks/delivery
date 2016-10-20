@@ -33,7 +33,7 @@ class OrderTransformer extends TransformerAbstract
         ];
     }
 
-    protected getArrayProductNames(Collection $items)
+    protected function getArrayProductNames(Collection $items)
     {
         $names = [];
         foreach ($items as $item) {

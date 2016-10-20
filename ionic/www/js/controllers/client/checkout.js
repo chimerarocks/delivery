@@ -24,7 +24,7 @@ angular.module('starter.controllers')
 			}
 
 			$scope.openProductDetail = function($index) {
-				$state.go('client.checkout.detail', {index: $index});
+				$state.go('client.checkout_detail', {index: $index});
 			}
 
 			$scope.openListProducts = function() {
@@ -42,9 +42,9 @@ angular.module('starter.controllers')
 				if ($scope.value) {
 					items.coupon.code = $scope.coupon.code;
 				}
-				ClientOrder.save({id: null}, items.items, function(data) {
+				ClientOrder.save({id: null}, items, function(data) {
 					$ionicLoading.hide();
-					$state.go('clien.checkout.successful');
+					$state.go('client.checkout_successful');
 				}, function(error) {
 					$ionicLoading.hide();
 					$ionicPopup.alert({

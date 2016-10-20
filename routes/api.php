@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => ['cors']], function () {
+Route::group(['middleware' => ['cors', 'auth:api']], function () {
 	
 	Route::get('/user', function (Request $request) {
 	    return $request->user();
@@ -22,7 +22,7 @@ Route::group(['middleware' => ['cors']], function () {
 	Route::group([
 		'prefix' => 'client', 
 		'as' => 'client.',
-		'middleware' => ['auth:api', 'api.checkrole:client']
+		'middleware' => ['api.checkrole:client']
 		], function() {
 		Route::resource('orders', 'Api\Client\ClientCheckoutController', [
 				'except' => ['create', 'edit', 'destroy']
@@ -34,7 +34,7 @@ Route::group(['middleware' => ['cors']], function () {
 	Route::group([
 		'prefix' => 'deliveryman', 
 		'as' => 'deliveryman.',
-		'middleware' => ['auth:api', 'api.checkrole:deliveryman']
+		'middleware' => ['api.checkrole:deliveryman']
 		], function() {
 		Route::resource('orders', 'Api\Deliveryman\DeliverymanCheckoutController', [
 				'except' => ['create', 'edit', 'destroy', 'store']
@@ -50,5 +50,6 @@ Route::group(['middleware' => ['cors']], function () {
 
 	Route::get('coupons/{code}', 'Api\CouponController@show');
 	Route::get('authenticated', 'Api\UserController@authenticated');
+	Route::patch('device_token', 'Api\UserController@updateDeviceToken');
 	
 });

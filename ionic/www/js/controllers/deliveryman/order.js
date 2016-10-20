@@ -34,7 +34,7 @@ angular.module('starter.controllers')
 			$ionicLoading.hide();
 		});
 
-		function getOrders = function () {
+		function getOrders() {
 			return DeliverymanOrder.query({
 				id: null,
 				orderBy: 'created_at',

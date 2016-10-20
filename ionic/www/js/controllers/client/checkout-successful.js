@@ -16,7 +16,7 @@ angular.module('starter.controllers')
 				var cart = $cart.get();
 				$scope.coupon = cart.coupon;
 				$scope.items = cart.items;
-				$scope.total = cart.getTotalFinal();
+				$scope.total = $cart.getTotalFinal();
 			}
 
 			$scope.openListOrder = function() {

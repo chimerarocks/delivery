@@ -6,21 +6,25 @@ use Delivery\Models\Order;
 use Delivery\Repositories\CouponRepository;
 use Delivery\Repositories\OrderRepository;
 use Delivery\Repositories\ProductRepository;
+use Dmitrovskiy\IonicPush\PushProcessor;
 
 class OrderService
 {
 	private $orderRepository;
 	private $couponRepository;
 	private $productRepository;
+	private $pushProcessor;
 
 	public function __construct(
 		OrderRepository $orderRepository, 
 		CouponRepository$couponRepository, 
-		ProductRepository $productRepository)
+		ProductRepository $productRepository, 
+		PushProcessor $pushProcessor)
 	{
 		$this->orderRepository = $orderRepository;
 		$this->couponRepository = $couponRepository;
 		$this->productRepository = $productRepository;
+		$this->pushProcessor = $pushProcessor;
 	}
 
 	public function create(array $data)
@@ -70,10 +74,21 @@ class OrderService
 	{
 		$order = $this->orderRepository->getByIdAndDeliveryman($id, $idDeliveryman);
 		$order->status = $status;
-		if((int) $order->status == 1 && !$order->hash) {
-			$order->hash = md5((new \DateTime())->getTimestamp());
+		switch((int) $status) {
+			case 1:
+				if (!$order->hash) {
+					$order->hash = md5((new \DateTime())->getTimestamp());
+				}
+				$order->save();
+				break;
+			case 2:
+				$user = $order->client->user;
+				$order->save();
+				$this->pushProcessor->notify([$user->device_token],[
+					'alert' => 'Seu pedido nº' . $order->id . ' foi entrege'
+				]);
+				break;
 		}
-		$order->save();
 		return $order;
 	}
 }

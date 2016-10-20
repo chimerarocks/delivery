@@ -58,7 +58,7 @@ angular.module('starter.controllers')
 			$ionicLoading.hide();
 		});
 
-		function getOrders = function () {
+		function getOrders () {
 			return ClientOrder.query({
 				id: null,
 				orderBy: 'created_at',
